@@ -4,7 +4,7 @@
     {
         private static void Main(string[] args)
         {
-            var solucion = new Solucion();
+            new Solucion().EjecutarSolucion(Producto.CrearListaDeEjemplo());
         }
     }
 }
