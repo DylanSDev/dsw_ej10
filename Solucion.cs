@@ -91,52 +91,98 @@ namespace Dsw2025Ej10
 
         public void EjecutarSolucion(List<Producto> lista)
         {
+            Console.WriteLine("═══════════════════════════════════════════");
+            Console.WriteLine("          ANÁLISIS DE PRODUCTOS           ");
+            Console.WriteLine("═══════════════════════════════════════════\n");
+
             // 1. El primer producto
             var primerProducto = PrimerProducto(lista);
-            Console.WriteLine($"[1] Primer Producto: {primerProducto.Descripcion}, Precio: {primerProducto.Precio}");
+            Console.WriteLine("[1] Primer Producto:");
+            Console.WriteLine($"  • Descripción: {primerProducto.Descripcion}");
+            Console.WriteLine($"  • Precio: {primerProducto.Precio:C2}\n");
 
             // 2. El último producto
             var ultimoProducto = UltimoProducto(lista);
-            Console.WriteLine($"[2] Último Producto: {ultimoProducto.Descripcion}, Precio: {ultimoProducto.Precio}");
+            Console.WriteLine("[2] Último Producto:");
+            Console.WriteLine($"  • Descripción: {ultimoProducto.Descripcion}");
+            Console.WriteLine($"  • Precio: {ultimoProducto.Precio:C2}\n");
 
             // 3. La suma de precios
             var sumaPrecios = SumarPrecios(lista);
-            Console.WriteLine($"[3] Suma de Precios: {sumaPrecios}");
+            Console.WriteLine($"[3] Suma de Precios: {sumaPrecios:C2}\n");
 
             // 4. El promedio de precios
             var promedioPrecios = PromedioPrecios(lista);
-            Console.WriteLine($"[4] Promedio de Precios: {promedioPrecios}");
+            Console.WriteLine($"[4] Promedio de Precios: {promedioPrecios:C2}\n");
+            EsperarEnter();
 
             // 5. Listar los productos con Id mayor a 15
+            Console.Clear();
+            Console.WriteLine("═══════════════════════════════════════════");
+            Console.WriteLine(" PRODUCTOS CON ID MAYOR A 15 ");
+            Console.WriteLine("═══════════════════════════════════════════\n");
             var productosIdMayor15 = FiltrarId15(lista);
-            Console.WriteLine("[5] Productos con Id mayor a 15:");
-            ImprimirLista(productosIdMayor15);
+            foreach (var p in productosIdMayor15)
+            {
+                Console.WriteLine($"  • ID: {p.Id} - {p.Descripcion} ({p.Precio:C2})");
+            }
+            EsperarEnter();
 
-            // 6. Obtener y mostrar productos con precios formateados
+            // 6. Productos con precios formateados
+            Console.Clear();
+            Console.WriteLine("═══════════════════════════════════════════");
+            Console.WriteLine(" PRECIOS FORMATEADOS ");
+            Console.WriteLine("═══════════════════════════════════════════\n");
             var productosFormateados = ObtenerProductosConPrecios(lista);
-            Console.WriteLine("[6] Productos con precios formateados:");
             MostrarProductosConPreciosFormateados(productosFormateados);
+            EsperarEnter();
 
-            // 7. El producto con el precio más alto
+            // 7. y 8. Precios máximo y mínimo
+            Console.Clear();
+            Console.WriteLine("═══════════════════════════════════════════");
+            Console.WriteLine(" PRECIOS EXTREMOS ");
+            Console.WriteLine("═══════════════════════════════════════════\n");
             var precioMaximo = ProductoPrecioMaximo(lista);
             Console.WriteLine($"[7] Precio más alto: {precioMaximo}");
 
-            // 8. El producto con el precio más bajo
             var precioMinimo = ProductoPrecioMinimo(lista);
             Console.WriteLine($"[8] Precio más bajo: {precioMinimo}");
 
-            // 9. Productos cuyo precio es mayor al promedio
-            Console.WriteLine("[9] Productos con precio mayor al promedio:");
+            EsperarEnter();
+
+            // 9. Productos con precio mayor al promedio
+            Console.Clear();
+            Console.WriteLine("═══════════════════════════════════════════");
+            Console.WriteLine($" PRODUCTOS SOBRE EL PROMEDIO ({promedioPrecios:C2}) ");
+            Console.WriteLine("═══════════════════════════════════════════\n");
             MayoresAlPrecioPromedio(lista);
+            EsperarEnter();
 
-            // 10. Productos ordenados por descripción de forma descendente
-            Console.WriteLine("[10] Productos ordenados por descripción (descendente):");
+            // 10. Productos ordenados por descripción
+            Console.Clear();
+            Console.WriteLine("═══════════════════════════════════════════");
+            Console.WriteLine(" ORDEN DESCENDENTE POR DESCRIPCIÓN ");
+            Console.WriteLine("═══════════════════════════════════════════\n");
             OrdenarProductosPorDescripcion(lista);
+            EsperarEnter();
 
-            // 11. Productos que empiezan con un string determinado (ejemplo: "A")
+            // 11. Productos que empiezan con "A"
+            Console.Clear();
+            Console.WriteLine("═══════════════════════════════════════════");
+            Console.WriteLine(" PRODUCTOS QUE COMIENZAN CON 'A' ");
+            Console.WriteLine("═══════════════════════════════════════════\n");
             var productosEmpiezanConA = EmpiezaCon(lista, "A");
-            Console.WriteLine("[11] Productos que empiezan con 'A':");
-            ImprimirLista(productosEmpiezanConA);
+            foreach (var p in productosEmpiezanConA)
+            {
+                Console.WriteLine($"  • {p.Descripcion} (ID: {p.Id})");
+            }
+            EsperarEnter();
+        }
+
+        private void EsperarEnter()
+        {
+            Console.WriteLine("\nPresiona Enter para continuar...");
+            Console.ReadLine();
         }
     }
 }
