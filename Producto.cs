@@ -9,8 +9,8 @@ namespace Dsw2025Ej10
     internal class Producto
     {
         public int Id { get; private set; }
-        public decimal Precio { get; private set; }
         public string Descripcion { get; private set; }
+        public decimal Precio { get; private set; }
 
         public Producto(int id, string descripcion, decimal precio)
         {
