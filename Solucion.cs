@@ -8,18 +8,6 @@ namespace Dsw2025Ej10
 {
     internal class Solucion
     {
-        /* A partir de la lista de productos que se obtiene de Producto.CrearListaDeEjemplo()
-             * Resolver:
-             * 4.
-             * 5.
-             * 6.
-             *
-             * 8. El producto con el precio más bajo
-             * 9. Obtener y mostrar los productos cuyo precio sea mayor al promedio
-             * 10. Listar los productos ordenados por descripción de forma descendente
-             * Cada punto se debe realizar en un método distinto, en una nueva clase llamada Solucion
-             */
-
         // 1. El primer producto
         public Producto PrimerProducto(List<Producto> lista)
         {
@@ -58,12 +46,42 @@ namespace Dsw2025Ej10
             return lista.ConvertAll(p => new ProductoFormateado(p.Descripcion, p.Precio.ToString("C2")));
         }
 
-        public void MostrarProductosConPrecios(List<ProductoFormateado> lista)
+        public void MostrarProductosConPreciosFormateados(List<ProductoFormateado> lista)
         {
-            lista.ForEach(p => { Console.WriteLine($"[+] Nombre: {p.Descripcion}, Precio: {p.PrecioFormateado}"); });
+            lista.ForEach(p => { Console.WriteLine($"[+] Product: {p.Descripcion}, Precio: {p.PrecioFormateado}"); });
         }
 
         // 7. El producto con el precio más alto
+        public decimal ProductoPrecioMaximo(List<Producto> lista)
+        {
+            return lista.Max(p => p.Precio);
+        }
+
+        // 8. El producto con el precio más bajo
+        public decimal ProductoPrecioMinimo(List<Producto> lista)
+        {
+            return lista.Min(p => p.Precio);
+        }
+
+        // 9. Obtener y mostrar los productos cuyo precio sea mayor al promedio
+        public void MayoresAlPrecioPromedio(List<Producto> lista)
+        {
+            var mayoresAlPromedio = lista.Where(p => p.Precio > (lista.Average(p => p.Precio))).ToList();
+            ImprimirLista(mayoresAlPromedio);
+        }
+
+        // 10. Listar los productos ordenados por descripción de forma descendente
+        public void OrdenarProductosPorDescripcion(List<Producto> lista)
+        {
+            var ordenadosPorDescripcion = lista.OrderByDescending(p => p.Descripcion).ToList();
+            ImprimirLista(ordenadosPorDescripcion);
+        }
+
+        // Imprimir lista con nombre y precio del producto
+        public void ImprimirLista(List<Producto> lista)
+        {
+            lista.ForEach(p => Console.WriteLine($"[+] Producto: {p.Descripcion}, Precio: {p.Precio} "));
+        }
 
         // 11. Productos que empiezan con un string determinado
         public List<Producto> EmpiezaCon(List<Producto> lista, string X)
