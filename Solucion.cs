@@ -52,15 +52,15 @@ namespace Dsw2025Ej10
         }
 
         // 7. El producto con el precio más alto
-        public decimal ProductoPrecioMaximo(List<Producto> lista)
+        public Producto ProductoPrecioMaximo(List<Producto> lista)
         {
-            return lista.Max(p => p.Precio);
+            return lista.OrderByDescending(p => p.Precio).First();
         }
 
         // 8. El producto con el precio más bajo
-        public decimal ProductoPrecioMinimo(List<Producto> lista)
+        public Producto ProductoPrecioMinimo(List<Producto> lista)
         {
-            return lista.Min(p => p.Precio);
+            return lista.OrderBy(p => p.Precio).First();
         }
 
         // 9. Obtener y mostrar los productos cuyo precio sea mayor al promedio
@@ -142,11 +142,13 @@ namespace Dsw2025Ej10
             Console.WriteLine("═══════════════════════════════════════════");
             Console.WriteLine(" PRECIOS EXTREMOS ");
             Console.WriteLine("═══════════════════════════════════════════\n");
-            var precioMaximo = ProductoPrecioMaximo(lista);
-            Console.WriteLine($"[7] Precio más alto: {precioMaximo}");
+            var productoMaximo = ProductoPrecioMaximo(lista);
+            Console.WriteLine($"[7] Precio más alto: {productoMaximo.Precio}");
+            Console.WriteLine($"\t[+] Producto: {productoMaximo.Descripcion}");
 
-            var precioMinimo = ProductoPrecioMinimo(lista);
-            Console.WriteLine($"[8] Precio más bajo: {precioMinimo}");
+            var productoMinimo = ProductoPrecioMinimo(lista);
+            Console.WriteLine($"[8] Precio más bajo: {productoMinimo.Precio}");
+            Console.WriteLine($"\t[+] Producto: {productoMinimo.Descripcion}");
 
             EsperarEnter();
 
